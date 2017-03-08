@@ -66,9 +66,9 @@ function getLCode(phoneNum) {
     var LCode;
 
     try {
-        LCode = between(phoneNum, ")", "-");
+        LCode = phoneNum.slice(10, 15);
         LCode = LCode.trim();
-        if (LCode.length == 3 && Number(LCode)) {
+        if (LCode.length == 4 && Number(LCode)) {
             return LCode;
         } else {
             throw new Error("Invalid L code: " + LCode);
