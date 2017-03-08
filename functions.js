@@ -28,13 +28,52 @@ function between(string, start, end) {
  * @returns {string} The area code
  */
 function getAreaCode(phoneNum) {
-    function getAreaCode(phoneNum) {
 
-    var areaCode = between(phoneNum, "(", ")");
+    var areaCode;
 
-    if (areaCode == undefined) {
-        return undefined;
+    try {
+        areaCode = between(phoneNum, "(", ")");
+        areaCode = areaCode.trim();
+        if (areaCode.length == 3 && Number(areaCode)) {
+            return areaCode;
+        } else {
+            throw new Error("Invalid area code: " + areaCode);
+        }
+    } catch (error) {
+        throw new Error("Invalid phone number: " + error.message);
     }
-    return areaCode;
 }
+
+function getCOCode(phoneNum) {
+
+    var COCode;
+
+    try {
+        COCode = between(phoneNum, ")", "-");
+        COCode = COCode.trim();
+        if (COCode.length == 3 && Number(COCode)) {
+            return COCode;
+        } else {
+            throw new Error("Invalid CO code: " + COCode);
+        }
+    } catch (error) {
+        throw new Error("Invalid phone number: " + error.message);
+    }
+}
+
+function getLCode(phoneNum) {
+
+    var LCode;
+
+    try {
+        LCode = between(phoneNum, ")", "-");
+        LCode = LCode.trim();
+        if (LCode.length == 3 && Number(LCode)) {
+            return LCode;
+        } else {
+            throw new Error("Invalid L code: " + LCode);
+        }
+    } catch (error) {
+        throw new Error("Invalid phone number: " + error.message);
+    }
 }
