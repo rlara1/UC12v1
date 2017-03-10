@@ -66,7 +66,7 @@ function getLCode(phoneNum) {
     var LCode;
 
     try {
-        LCode = phoneNum.slice(10, 15);
+        LCode = phoneNum.slice(10);
         LCode = LCode.trim();
         if (LCode.length == 4 && Number(LCode)) {
             return LCode;
@@ -76,4 +76,37 @@ function getLCode(phoneNum) {
     } catch (error) {
         throw new Error("Invalid phone number: " + error.message);
     }
+}
+
+function displayCodes(inputId, outputIdArea, outputIdLine, outputIdCO) {
+    var outputTextArea = "";
+    var outputTextLine = "";
+    var outputTextCO = "";
+    var phoneNum = document.getElementById(inputId).value;
+
+    try {
+        var areaCode = getAreaCode(phoneNum.replace(/ /g,""));
+        outputTextArea = "Your area code is " + areaCode;
+    } catch (error) {
+        console.log(error.message);
+        outputTextArea = error.message;
+    }
+        try {
+        var lineCode = getLCode(phoneNum.replace(/ /g,""));
+        outputTextLine = "Your line code is " + lineCode;
+    } catch (error) {
+        console.log(error.message);
+        outputTextLine = error.message;
+    }
+        try {
+        var coCode = getCOCode(phoneNum.replace(/ /g, ""));
+        outputTextCO = "Your CO code is " + coCode;
+    } catch (error) {
+        console.log(error.message);
+        outputTextCO = error.message;
+    }
+
+    document.getElementById(outputIdArea).innerHTML = outputTextArea;
+    document.getElementById(outputIdLine).innerHTML = outputTextLine;
+    document.getElementById(outputIdCO).innerHTML = outputTextCO;
 }
