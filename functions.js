@@ -33,8 +33,6 @@ function isNumeric(number) {
         return true
     }
     else {
-        var audio = new Audio('error.mp3');
-        audio.play();
         return false;
     }
 }
@@ -72,7 +70,7 @@ function getLineCode(phoneNum) {
     var lineCode;
 
     try {
-        lineCode = phoneNum.slice(9);
+        lineCode = phoneNum.slice(10);
         if (lineCode.length == 4 && isNumeric(lineCode) == true) {
             return lineCode
         } else {
